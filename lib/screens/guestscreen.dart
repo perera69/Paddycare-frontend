@@ -1,15 +1,25 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ImageUpload extends StatelessWidget {
+class ImageUpload extends StatefulWidget {
   const ImageUpload({Key? key}) : super(key: key);
+
+  @override
+  _ImageUploadState createState() => _ImageUploadState();
+}
+
+class _ImageUploadState extends State<ImageUpload> {
+  File? _pickedImage; // Variable to store the picked image
 
   Future<void> _getImageFromGallery() async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
-      // Process the picked image here
+      setState(() {
+        _pickedImage = File(pickedFile.path); // Store the picked image
+      });
     }
   }
 
@@ -51,19 +61,16 @@ class ImageUpload extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 60), // Increased space between buttons
-            // Centered buttons
+            const SizedBox(height: 60),
             Center(
               child: Column(
                 children: [
-                  // Add Button to access gallery photos
                   MaterialButton(
                     color: Color.fromARGB(255, 20, 119, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    onPressed:
-                        _getImageFromGallery, // Call the image picker function
+                    onPressed: _getImageFromGallery,
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Text(
@@ -75,8 +82,7 @@ class ImageUpload extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20), // Increased space between buttons
-                  // Detect Diseases Button
+                  const SizedBox(height: 20),
                   MaterialButton(
                     color: Color.fromARGB(255, 20, 119, 1),
                     shape: RoundedRectangleBorder(
@@ -99,10 +105,28 @@ class ImageUpload extends StatelessWidget {
                 ],
               ),
             ),
+            if (_pickedImage != null)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Image.file(
+                    _pickedImage!,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
             const Spacer(),
           ],
         ),
       ),
     );
   }
+}
+
+void main() {
+  runApp(MaterialApp(
+    home: ImageUpload(),
+  ));
 }
