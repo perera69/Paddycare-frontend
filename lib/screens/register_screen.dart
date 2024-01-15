@@ -5,7 +5,7 @@ import 'package:login_signup_flow_app/screens/login_screen.dart';
 import 'package:login_signup_flow_app/screens/welcome_screen.dart';
 
 class ApiService {
-  static const baseUrl = "http://172.31.112.1:3000"; // my server IP/port
+  static const baseUrl = "http://10.11.13.88:3000"; // my server IP/port
 
   static Future<Map<String, dynamic>> registerUser(
     Map<String, dynamic> data,
@@ -129,7 +129,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Login'),
+              child: const Text('register'),
             ),
           ],
         );
