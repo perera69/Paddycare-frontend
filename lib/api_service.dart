@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   static const baseUrl =
-      "http://172.31.112.1:3000"; // Replace with your actual server IP
+      "http://10.11.13.88:3000"; // Replace with your actual server IP
 
   static Future<Map<String, dynamic>> registerUser(
     Map<String, dynamic> data,
@@ -38,7 +38,7 @@ class ApiService {
 }
 
 class ApiServicelogin {
-  static const baseUrl = "http://172.31.112.1:3000"; // my server IP
+  static const baseUrl = "http://10.11.13.88:3000"; // my server IP
 
   static Future<Map<String, dynamic>> loginUser(
       Map<String, dynamic> data) async {

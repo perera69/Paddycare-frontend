@@ -26,10 +26,26 @@ class _LoginScreenState extends State<LoginScreen> {
       print("Response: $response");
 
       if (response['message'] == 'Login successful') {
-        // Successful login, navigate to the next screen
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ImageUpload()),
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Login Successful'),
+              content: Text('You have successfully logged in.'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    // Navigate to the next screen on dialog confirmation
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ImageUpload()),
+                    );
+                  },
+                  child: Text('OK'),
+                ),
+              ],
+            );
+          },
         );
       } else {
         // Show error message
